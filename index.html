@@ -1,0 +1,1619 @@
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>亍幵的网站作品集 | 科幻风格</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义主题 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cyber-black': '#0D0221',
+            'cyber-dark': '#1A143B',
+            'cyber-blue': '#00F0FF',
+            'cyber-purple': '#B300FF',
+            'cyber-pink': '#FF00C8',
+            'cyber-gray': '#2D2B55',
+            'cyber-light': '#E6E6FA',
+          },
+          fontFamily: {
+            'cyber': ['Orbitron', 'Rajdhani', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'scan': 'scan 4s linear infinite',
+            'beat': 'beat 1.5s ease-in-out infinite',
+            'border-rotate': 'border-rotate 4s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3)' },
+              '100%': { boxShadow: '0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.3)' },
+            },
+            scan: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100%)' },
+            },
+            beat: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.1)' },
+            },
+            'border-rotate': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            }
+          }
+        },
+      }
+    }
+  </script>
+  
+  <!-- 引入科幻风格字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow-cyber {
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
+      }
+      .text-shadow-purple {
+        text-shadow: 0 0 10px rgba(179, 0, 255, 0.7), 0 0 20px rgba(179, 0, 255, 0.5);
+      }
+      .border-glow {
+        box-shadow: 0 0 5px rgba(0, 240, 255, 0.7), 0 0 10px rgba(0, 240, 255, 0.5);
+      }
+      .border-glow-purple {
+        box-shadow: 0 0 5px rgba(179, 0, 255, 0.7), 0 0 10px rgba(179, 0, 255, 0.5);
+      }
+      .grid-bg {
+        background-image: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                         linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .scanline {
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background: rgba(0, 240, 255, 0.1);
+        z-index: 2;
+      }
+      .clip-polygon {
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+      }
+      .noise-bg {
+        position: relative;
+      }
+      .noise-bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.03;
+        z-index: 1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        pointer-events: none;
+      }
+      .music-tooltip {
+        animation: fadeInOut 3s ease-in-out forwards;
+      }
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(10px); }
+        10% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+      }
+      /* 优化的卡片悬停效果 */
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+      }
+      /* 上传区域拖拽状态 */
+      .upload-area.drag-over {
+        border-color: #00F0FF;
+        background-color: rgba(0, 240, 255, 0.1);
+      }
+      /* 上传状态提示 */
+      .upload-status {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        transition: opacity 0.3s ease;
+      }
+      /* 技术标签云样式 */
+      .tech-tag {
+        transition: all 0.2s ease;
+      }
+      .tech-tag:hover {
+        transform: scale(1.1);
+        font-weight: 500;
+      }
+      /* 项目标题强调效果 */
+      .project-title-highlight {
+        position: relative;
+        display: inline-block;
+      }
+      .project-title-highlight::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #00F0FF, #B300FF);
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+      }
+      .project-title-highlight:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+      /* 项目卡片装饰边框 */
+      .project-border {
+        position: relative;
+        border: 1px solid transparent;
+        background-clip: padding-box;
+      }
+      .project-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        margin: -1px;
+        border-radius: inherit;
+        background: linear-gradient(45deg, #00F0FF, #B300FF, #FF00C8, #00F0FF);
+        background-size: 400% 400%;
+        animation: border-rotate 8s linear infinite;
+        opacity: 0.7;
+      }
+      /* 项目卡片图标容器 */
+      .project-icon-container {
+        width: 16px;
+        height: 16px;
+        position: relative;
+      }
+      .project-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-cyber-black text-cyber-light font-cyber noise-bg">
+  <!-- 背景音乐元素 -->
+  <audio id="backgroundMusic" loop preload="none">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+  
+  <!-- 音乐控制按钮 -->
+  <button id="musicControl" class="fixed top-20 right-6 z-40 w-10 h-10 rounded-full bg-cyber-purple/20 border border-cyber-purple/50 text-cyber-purple flex items-center justify-center shadow-lg hover:bg-cyber-purple/30 transition-all border-glow-purple animate-beat">
+    <i class="fa fa-music"></i>
+  </button>
+  
+  <!-- 音乐提示框 -->
+  <div id="musicTooltip" class="fixed top-32 right-6 z-40 px-4 py-2 bg-cyber-dark/90 text-cyber-light text-sm rounded-lg border border-cyber-purple/30 hidden music-tooltip">
+    点击音符控制背景音乐
+  </div>
+
+  <!-- 扫描线效果 -->
+  <div class="scanline animate-scan"></div>
+  
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-cyber-black/70 backdrop-blur-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-cyber-blue flex items-center gap-2 text-shadow-cyber">
+        <i class="fa fa-microchip"></i>
+        <span>亍幵的<span class="text-cyber-purple text-shadow-purple">作品集</span></span>
+      </a>
+      
+      <!-- 桌面导航 -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="font-medium text-cyber-light hover:text-cyber-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-cyber-blue after:transition-all after:duration-300">首页</a>
+        <a href="#projects" class="font-medium text-cyber-light hover:text-cyber-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-cyber-blue after:transition-all after:duration-300">网站项目</a>
+        <a href="#about" class="font-medium text-cyber-light hover:text-cyber-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-cyber-blue after:transition-all after:duration-300">关于我</a>
+        <a href="#contact" class="font-medium text-cyber-light hover:text-cyber-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-cyber-blue after:transition-all after:duration-300">联系我</a>
+        <button id="manageBtn" class="font-medium text-cyber-light hover:text-cyber-blue transition-colors flex items-center gap-1">
+          <i class="fa fa-cog"></i>管理
+        </button>
+      </nav>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menuBtn" class="md:hidden text-cyber-blue focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="hidden md:hidden bg-cyber-dark/90 backdrop-blur-md border-t border-cyber-blue/30">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#home" class="py-2 font-medium text-cyber-light hover:text-cyber-blue transition-colors">首页</a>
+        <a href="#projects" class="py-2 font-medium text-cyber-light hover:text-cyber-blue transition-colors">网站项目</a>
+        <a href="#about" class="py-2 font-medium text-cyber-light hover:text-cyber-blue transition-colors">关于我</a>
+        <a href="#contact" class="py-2 font-medium text-cyber-light hover:text-cyber-blue transition-colors">联系我</a>
+        <button id="mobileManageBtn" class="py-2 font-medium text-left text-cyber-blue hover:text-cyber-blue/80 transition-colors flex items-center gap-1">
+          <i class="fa fa-cog"></i>管理
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 封面区域 -->
+  <section id="cover" class="h-screen flex items-center justify-center relative overflow-hidden grid-bg">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-cyber-dark/80 via-cyber-black/70 to-cyber-black"></div>
+      <!-- 动态网格背景 -->
+      <div class="absolute inset-0 grid-bg opacity-30"></div>
+    </div>
+    <div class="container mx-auto px-4 z-10 text-center">
+      <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold mb-6 leading-tight">
+        <span class="block text-cyber-blue text-shadow-cyber">亍幵的</span>
+        <span class="block text-cyber-purple text-shadow-purple">网站作品集</span>
+      </h1>
+      <p class="text-[clamp(1rem,3vw,1.25rem)] text-cyber-light/80 max-w-2xl mx-auto mb-10">
+        一名高中生的自学编程之路，记录我的网站开发作品和学习历程
+      </p>
+      <a href="#home" class="inline-block px-8 py-4 bg-transparent border-2 border-cyber-blue text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/10 transition-all animate-pulse-slow border-glow">
+        开始探索 <i class="fa fa-arrow-down ml-2"></i>
+      </a>
+    </div>
+    
+    <!-- 装饰性几何元素 - 在小屏幕上缩小或隐藏 -->
+    <div class="absolute top-1/4 left-10 w-32 h-32 border-2 border-cyber-purple/30 rounded-full animate-float opacity-70 sm:w-24 sm:h-24"></div>
+    <div class="absolute bottom-1/3 right-20 w-40 h-40 border-2 border-cyber-blue/30 rounded-full animate-float opacity-70 sm:w-32 sm:h-32" style="animation-delay: 2s"></div>
+    <div class="absolute top-1/2 right-1/4 w-20 h-20 border-2 border-cyber-pink/30 rotate-45 animate-float opacity-70 sm:w-16 sm:h-16" style="animation-delay: 1s"></div>
+  </section>
+
+  <!-- 管理模态框 -->
+  <div id="manageModal" class="fixed inset-0 bg-cyber-black/80 z-50 flex items-center justify-center hidden backdrop-blur-sm">
+    <div class="bg-cyber-dark border border-cyber-blue/30 rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all border-glow relative overflow-hidden">
+      <!-- 模态框装饰 -->
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-blue to-cyber-purple"></div>
+      
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold text-cyber-blue">管理项目</h3>
+        <button id="closeModal" class="text-cyber-light/70 hover:text-cyber-blue transition-colors">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <!-- 密码验证 -->
+      <div id="passwordSection">
+        <p class="text-cyber-light/70 mb-4">请输入管理员密码以管理项目</p>
+        <div class="mb-4">
+          <label for="adminPassword" class="block text-sm font-medium text-cyber-blue mb-1">密码</label>
+          <input type="password" id="adminPassword" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" placeholder="输入管理员密码">
+        </div>
+        <button id="verifyPassword" class="w-full px-4 py-2 bg-cyber-blue/20 hover:bg-cyber-blue/30 text-cyber-blue border border-cyber-blue/50 rounded-lg transition-all">
+          验证
+        </button>
+      </div>
+      
+      <!-- 项目管理区域 (默认隐藏) -->
+      <div id="projectManagementSection" class="hidden">
+        <div class="mb-6">
+          <h4 class="font-bold text-cyber-blue mb-2">项目管理</h4>
+          <p class="text-cyber-light/70 text-sm mb-4">在这里可以添加新的项目或删除现有项目</p>
+          
+          <!-- 添加新项目按钮 -->
+          <button id="addNewProjectBtn" class="w-full px-4 py-2 bg-cyber-blue/20 hover:bg-cyber-blue/30 text-cyber-blue border border-cyber-blue/50 rounded-lg transition-all mb-4 flex items-center justify-center gap-2">
+            <i class="fa fa-plus"></i> 添加新项目
+          </button>
+          
+          <!-- 现有项目列表 -->
+          <div>
+            <h4 class="font-bold text-cyber-blue mb-3">现有项目</h4>
+            <div id="existingProjectsList" class="max-h-60 overflow-y-auto pr-2 space-y-3">
+              <!-- 现有项目将通过JavaScript动态加载 -->
+              <p class="text-cyber-light/50 text-sm italic">暂无项目可管理</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 添加项目表单 (默认隐藏) -->
+      <div id="addProjectSection" class="hidden">
+        <div class="flex justify-between items-center mb-4">
+          <h4 class="font-bold text-cyber-blue">添加新项目</h4>
+          <button id="backToManagementBtn" class="text-cyber-light/70 hover:text-cyber-blue transition-colors">
+            <i class="fa fa-arrow-left"></i> 返回
+          </button>
+        </div>
+        
+        <!-- 项目标题强调效果 -->
+        <div class="mb-6 bg-gradient-to-r from-cyber-blue/10 to-cyber-purple/10 p-4 rounded-lg border border-cyber-blue/20">
+          <h5 class="text-cyber-blue text-sm mb-1">项目基本信息</h5>
+          <p class="text-cyber-light/60 text-xs">请填写项目的核心信息，这将直接展示在作品集中</p>
+        </div>
+        
+        <form id="addProjectForm" class="space-y-5">
+          <div>
+            <label for="projectName" class="block text-sm font-medium text-cyber-blue mb-1">项目名称 <span class="text-cyber-pink text-xs">*</span></label>
+            <input type="text" id="projectName" name="projectName" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" placeholder="输入项目名称" required>
+          </div>
+          
+          <div>
+            <label for="projectUrl" class="block text-sm font-medium text-cyber-blue mb-1">网站URL <span class="text-cyber-pink text-xs">*</span></label>
+            <input type="url" id="projectUrl" name="projectUrl" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" placeholder="https://example.com" required>
+          </div>
+          
+          <div>
+            <label for="projectDescription" class="block text-sm font-medium text-cyber-blue mb-1">项目描述 <span class="text-cyber-pink text-xs">*</span></label>
+            <textarea id="projectDescription" name="projectDescription" rows="3" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" placeholder="描述这个项目的功能、特点和开发思路" required></textarea>
+          </div>
+          
+          <div>
+            <label for="projectCategory" class="block text-sm font-medium text-cyber-blue mb-1">项目类别 <span class="text-cyber-pink text-xs">*</span></label>
+            <select id="projectCategory" name="projectCategory" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" required>
+              <option value="ecommerce">电商网站</option>
+              <option value="portfolio">作品集</option>
+              <option value="blog">博客网站</option>
+              <option value="business">企业网站</option>
+              <option value="other">其他</option>
+            </select>
+          </div>
+          
+          <!-- 技术标签区域 -->
+          <div>
+            <label for="projectTechnologies" class="block text-sm font-medium text-cyber-blue mb-1">使用技术 <span class="text-cyber-pink text-xs">(用逗号分隔)</span></label>
+            <input type="text" id="projectTechnologies" name="projectTechnologies" class="w-full px-4 py-2 bg-cyber-black border border-cyber-blue/50 rounded-lg focus:ring-2 focus:ring-cyber-blue focus:border-cyber-blue transition-colors text-cyber-light" placeholder="HTML, CSS, JavaScript, React">
+            
+            <!-- 常用技术提示 -->
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="tech-tag px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded cursor-pointer hover:bg-cyber-blue/20">HTML5</span>
+              <span class="tech-tag px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded cursor-pointer hover:bg-cyber-blue/20">CSS3</span>
+              <span class="tech-tag px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded cursor-pointer hover:bg-cyber-blue/20">JavaScript</span>
+              <span class="tech-tag px-2 py-1 bg-cyber-purple/10 text-cyber-purple text-xs rounded cursor-pointer hover:bg-cyber-purple/20">React</span>
+              <span class="tech-tag px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded cursor-pointer hover:bg-cyber-blue/20">Tailwind</span>
+              <span class="tech-tag px-2 py-1 bg-cyber-pink/10 text-cyber-pink text-xs rounded cursor-pointer hover:bg-cyber-pink/20">UI设计</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="w-full px-4 py-3 bg-gradient-to-r from-cyber-blue/20 to-cyber-purple/20 hover:from-cyber-blue/30 hover:to-cyber-purple/30 text-cyber-light font-medium rounded-lg transition-all border border-cyber-blue/30 border-glow flex items-center justify-center gap-2">
+            <i class="fa fa-save"></i> 保存项目
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 删除确认模态框 -->
+  <div id="deleteConfirmModal" class="fixed inset-0 bg-cyber-black/80 z-50 flex items-center justify-center hidden backdrop-blur-sm">
+    <div class="bg-cyber-dark border border-cyber-pink/30 rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all border-glow-purple relative overflow-hidden">
+      <!-- 模态框装饰 -->
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-pink to-cyber-purple"></div>
+      
+      <div class="text-center mb-4">
+        <div class="w-16 h-16 bg-cyber-pink/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-trash text-2xl text-cyber-pink"></i>
+        </div>
+        <h3 class="text-xl font-bold text-cyber-pink">确认删除</h3>
+        <p class="text-cyber-light/70 mt-2">您确定要删除这个项目吗？此操作无法撤销。</p>
+        <p id="projectToDeleteName" class="font-medium mt-1 text-cyber-blue"></p>
+      </div>
+      
+      <div class="flex gap-4">
+        <button id="cancelDeleteBtn" class="flex-1 px-4 py-2 bg-cyber-gray hover:bg-cyber-gray/80 text-cyber-light rounded-lg transition-colors">
+          取消
+        </button>
+        <button id="confirmDeleteBtn" class="flex-1 px-4 py-2 bg-cyber-pink/20 hover:bg-cyber-pink/30 text-cyber-pink border border-cyber-pink/50 rounded-lg transition-colors">
+          确认删除
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主内容 -->
+  <main>
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-20 pb-20 bg-cyber-dark grid-bg section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-10"></div>
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="lg:w-1/2 space-y-6 order-2 lg:order-1">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight">
+              用代码 <span class="text-cyber-blue text-shadow-cyber">创造</span> 价值
+            </h1>
+            <p class="text-lg text-cyber-light/70 max-w-lg">
+              我是亍幵，一名热爱编程的高中生，通过自学掌握了Web开发技能。这里展示了我开发的各类网站项目，每一个作品都代表着我的学习成果与创意实践。
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4">
+              <!-- 浏览作品按钮 -->
+              <a href="#projects" class="px-6 py-3 bg-transparent border-2 border-cyber-blue text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/10 transition-all border-glow flex items-center gap-2">
+                <span>浏览作品</span>
+                <i class="fa fa-arrow-right"></i>
+              </a>
+              <!-- 了解我的学习历程按钮 -->
+              <a href="#timeline" class="px-6 py-3 bg-transparent border-2 border-cyber-purple text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/10 transition-all border-glow-purple">
+                了解我的学习历程
+              </a>
+            </div>
+          </div>
+          <div class="lg:w-1/2 relative order-1 lg:order-2">
+            <div class="relative z-10 rounded-xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 border border-cyber-blue/30 border-glow animate-float">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/f32c72b3886547728e969dd029e7a328~tplv-a9rns2rl98-image.image?rcl=20250802210407D7BBF53F00CF761EA365&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754744652&amp;x-signature=NqnZvNXZXpJjfXVI7y3PrnYKKrs%3D" alt="网站开发展示图" class="w-full h-auto lazyload" loading="lazy">
+              <!-- 科技感图片边框边框 -->
+              <div class="absolute inset-0 border-4 border-transparent border-t-cyber-blue/50 border-b-cyber-purple/50 pointer-events-none"></div>
+            </div>
+            <div class="absolute top-10 -right-10 w-40 h-40 bg-cyber-purple/20 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute -bottom-5 -left-5 w-60 h-60 bg-cyber-blue/20 rounded-full blur-3xl -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能概览 -->
+    <section class="py-16 bg-cyber-black section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-20"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <!-- 在小屏幕上调整为更合适的网格布局 -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-blue/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-blue/50 group">
+            <i class="fa fa-html5 text-orange-500 text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>HTML5</span>
+              <i class="fa fa-check-circle text-cyber-blue text-xs"></i>
+            </h3>
+          </div>
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-blue/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-blue/50 group">
+            <i class="fa fa-css3 text-blue-500 text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>CSS3</span>
+              <i class="fa fa-check-circle text-cyber-blue text-xs"></i>
+            </h3>
+          </div>
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-blue/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-blue/50 group">
+            <i class="fa fa-js text-yellow-500 text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>JavaScript</span>
+              <i class="fa fa-check-circle text-cyber-blue text-xs"></i>
+            </h3>
+          </div>
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-purple/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-purple/50 group">
+            <i class="fa fa-react text-blue-400 text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>React</span>
+              <i class="fa fa-star text-cyber-purple text-xs"></i>
+            </h3>
+          </div>
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-blue/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-blue/50 group">
+            <i class="fa fa-code text-cyber-blue text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>Tailwind</span>
+              <i class="fa fa-check-circle text-cyber-blue text-xs"></i>
+            </h3>
+          </div>
+          <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-purple/20 text-center transform hover:scale-105 transition-transform hover:border-cyber-purple/50 group">
+            <i class="fa fa-paint-brush text-cyber-pink text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-medium flex items-center justify-center gap-1 text-cyber-light">
+              <span>UI设计</span>
+              <i class="fa fa-star text-cyber-purple text-xs"></i>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目展示区域 -->
+    <section id="projects" class="py-20 bg-cyber-dark section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-10"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-cyber-blue text-shadow-cyber">亍幵的网站项目</h2>
+          <p class="text-cyber-light/70 max-w-2xl mx-auto">
+            以下是我自学开发的网站作品，点击卡片即可访问对应网站。每个项目都记录了我的学习过程和技术成长。
+          </p>
+        </div>
+        
+        <!-- 项目过滤器 - 在小屏幕上优化布局 -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+          <button class="filter-btn active px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-blue/20 text-cyber-blue border border-cyber-blue/50 font-medium transition-all" data-filter="all">
+            全部项目
+          </button>
+          <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-gray/50 hover:bg-cyber-gray text-cyber-light font-medium transition-all" data-filter="ecommerce">
+            电商网站
+          </button>
+          <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-gray/50 hover:bg-cyber-gray text-cyber-light font-medium transition-all" data-filter="portfolio">
+            作品集
+          </button>
+          <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-gray/50 hover:bg-cyber-gray text-cyber-light font-medium transition-all" data-filter="blog">
+            博客网站
+          </button>
+          <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-gray/50 hover:bg-cyber-gray text-cyber-light font-medium transition-all" data-filter="business">
+            企业网站
+          </button>
+          <button class="filter-btn px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-cyber-gray/50 hover:bg-cyber-gray text-cyber-light font-medium transition-all" data-filter="other">
+            其他
+          </button>
+        </div>
+        
+        <!-- 项目卡片网格 - 优化响应式布局 -->
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 羽毛球快速计分板项目 - 默认项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow project-border transition-all" data-category="other" data-default="true" data-id="default-1">
+            <div class="p-8 relative">
+              <!-- 装饰性图标 -->
+              <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-blue/10 rounded-lg flex items-center justify-center text-cyber-blue">
+                <i class="fa fa-calculator"></i>
+              </div>
+              
+              <div class="mb-6 pt-2">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-xl font-bold text-cyber-light project-title-highlight">羽毛球快速计分板</h3>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">其他</span>
+                </div>
+                <p class="text-cyber-light/70 mb-6">
+                  一个实用的羽毛球比赛计分工具，支持快速记录比分、局数和比赛时间。这是我自学JavaScript后的第一个实践项目。
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">HTML5</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">CSS3</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">JavaScript</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">Tailwind CSS</span>
+                </div>
+                
+                <a href="https://577840261.github.io/badmintonrapidscoreboard/" target="_blank" class="inline-block px-4 py-2 bg-cyber-blue/20 border border-cyber-blue/50 text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/30 transition-colors">
+                  访问网站 <i class="fa fa-external-link ml-1"></i>
+                </a>
+              </div>
+              
+              <!-- 装饰性几何元素 -->
+              <div class="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyber-blue/30"></div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyber-purple/30"></div>
+            </div>
+          </div>
+          
+          <!-- 羽毛球拍拉线计算器项目 - 默认项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow-purple project-border transition-all" data-category="other" data-default="true" data-id="default-2">
+            <div class="p-8 relative">
+              <!-- 装饰性图标 -->
+              <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center text-cyber-purple">
+                <i class="fa fa-sliders"></i>
+              </div>
+              
+              <div class="mb-6 pt-2">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-xl font-bold text-cyber-light project-title-highlight">羽毛球拍拉线计算器</h3>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">其他</span>
+                </div>
+                <p class="text-cyber-light/70 mb-6">
+                  专业的羽毛球拍拉线计算器，帮助球员根据个人打法和习惯计算最佳拉线磅数，提升打球体验。
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">HTML5</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">CSS3</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">JavaScript</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">Tailwind CSS</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-purple text-xs rounded">Chart.js</span>
+                </div>
+                
+                <a href="https://577840261.github.io/badminton-racket-tension-calculator/" target="_blank" class="inline-block px-4 py-2 bg-cyber-purple/20 border border-cyber-purple/50 text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/30 transition-colors">
+                  访问网站 <i class="fa fa-external-link ml-1"></i>
+                </a>
+              </div>
+              
+              <!-- 装饰性几何元素 -->
+              <div class="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyber-purple/30"></div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyber-pink/30"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section id="about" class="py-20 bg-cyber-black section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-20"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col lg:flex-row gap-12 items-center">
+          <div class="lg:w-2/5 relative">
+            <div class="relative z-10 rounded-xl overflow-hidden shadow-2xl border border-cyber-blue/30 border-glow animate-float">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/49652e3d10cf4f10a949bedfed1ae33b~tplv-a9rns2rl98-image.image?rcl=202508022104275398F98972A9B6F7C7E5&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754744668&amp;x-signature=%2F6LTHLP%2F21%2BM9G4%2FIEIzMDp3k4A%3D" alt="开发者照片" class="w-full h-auto lazyload" loading="lazy">
+              <!-- 科技感图片边框 -->
+              <div class="absolute inset-0 border-4 border-transparent border-t-cyber-blue/50 border-b-cyber-purple/50 pointer-events-none"></div>
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-cyber-blue/20 rounded-full blur-3xl -z-10"></div>
+          </div>
+          <div class="lg:w-3/5 space-y-6">
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-cyber-purple text-shadow-purple">关于我（亍幵）</h2>
+            <p class="text-cyber-light/70">
+              你好！我是亍幵，一名热爱编程的高中生，通过自学掌握了Web开发技能。虽然学习时间不长，但我对创建实用、美观的网站充满热情，尤其专注专注于开发羽毛球相关的工具类网站。
+            </p>
+            <p class="text-cyber-light/70">
+              我的编程之旅始于对科技的好奇，从简单的HTML页面开始，逐步学习了CSS和JavaScript。现在我已经能够独立开发功能完整的网站，并不断挑战更复杂的项目。
+            </p>
+            <p class="text-cyber-light/70">
+              我喜欢从实际需求出发开发工具，将学到的知识应用到解决实际问题中。特别是羽毛球相关的工具开发，既能结合我的兴趣，又能帮助到其他爱好者。每完成一个项目，我都会记录下学习心得和遇到的挑战，这帮助我快速成长。
+            </p>
+            
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 bg-transparent border-2 border-cyber-purple text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/10 transition-all border-glow-purple w-fit">
+              <span>联系我</span>
+              <i class="fa fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学习历程时间线 -->
+    <section id="timeline" class="py-20 bg-cyber-dark section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-10"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-cyber-blue text-shadow-cyber">我的学习历程</h2>
+          <p class="text-cyber-light/70 max-w-2xl mx-auto">
+            记录我的编程学习之路，每一步都是成长的见证
+          </p>
+        </div>
+        
+        <div class="relative max-w-3xl mx-auto">
+          <!-- 时间线中轴线 -->
+          <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyber-blue via-cyber-purple to-cyber-pink transform md:translate-x-px"></div>
+          
+          <!-- 时间点1 -->
+          <div class="relative mb-12">
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:text-right order-2 md:order-1">
+                <h3 class="text-xl font-bold mb-2 text-cyber-blue">开始接触编程</h3>
+                <p class="text-cyber-light/70">通过在线教程第一次了解HTML和CSS，创建了第一个简单的静态网页。</p>
+              </div>
+              <div class="absolute left-0 md:left-1/2 w-8 h-8 rounded-full bg-cyber-blue text-cyber-black flex items-center justify-center transform md:-translate-x-1/2 z-10 order-1 md:order-2 border-2 border-cyber-dark animate-pulse-slow">
+                <i class="fa fa-code"></i>
+              </div>
+              <div class="md:w-1/2 md:pl-12 order-3"></div>
+              <div class="absolute left-9 md:left-1/2 text-sm font-medium text-cyber-blue transform md:-translate-x-1/2 -translate-y-8 order-0">2022年9月</div>
+            </div>
+          </div>
+          
+          <!-- 时间点2 -->
+          <div class="relative mb-12">
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 order-2">
+              </div>
+              <div class="absolute left-0 md:left-1/2 w-8 h-8 rounded-full bg-cyber-purple text-cyber-black flex items-center justify-center transform md:-translate-x-1/2 z-10 order-1 border-2 border-cyber-dark animate-pulse-slow">
+                <i class="fa fa-js"></i>
+              </div>
+              <div class="md:w-1/2 md:pl-12 order-3">
+                <h3 class="text-xl font-bold mb-2 text-cyber-purple">学习JavaScript</h3>
+                <p class="text-cyber-light/70">开始学习JavaScript，理解了变量、函数和基本的DOM操作，能够制作简单的交互效果。</p>
+              </div>
+              <div class="absolute left-9 md:left-1/2 text-sm font-medium text-cyber-purple transform md:-translate-x-1/2 -translate-y-8 order-0">2023年2月</div>
+            </div>
+          </div>
+          
+          <!-- 时间点3 -->
+          <div class="relative mb-12">
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 order-2 md:order-1">
+                <h3 class="text-xl font-bold mb-2 text-cyber-blue">完成第一个项目</h3>
+                <p class="text-cyber-light/70">开发了羽毛球快速计分板，将所学知识应用到实际项目中，解决了实际问题。</p>
+              </div>
+              <div class="absolute left-0 md:left-1/2 w-8 h-8 rounded-full bg-cyber-blue text-cyber-black flex items-center justify-center transform md:-translate-x-1/2 z-10 order-1 md:order-2 border-2 border-cyber-dark animate-pulse-slow">
+                <i class="fa fa-check-circle"></i>
+              </div>
+              <div class="md:w-1/2 md:pl-12 order-3"></div>
+              <div class="absolute left-9 md:left-1/2 text-sm font-medium text-cyber-blue transform md:-translate-x-1/2 -translate-y-8 order-0">2023年8月</div>
+            </div>
+          </div>
+          
+          <!-- 时间点4 -->
+          <div class="relative">
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 order-2">
+              </div>
+              <div class="absolute left-0 md:left-1/2 w-8 h-8 rounded-full bg-cyber-pink text-cyber-black flex items-center justify-center transform md:-translate-x-1/2 z-10 order-1 border-2 border-cyber-dark animate-pulse-slow">
+                <i class="fa fa-rocket"></i>
+              </div>
+              <div class="md:w-1/2 md:pl-12 order-3">
+                <h3 class="text-xl font-bold mb-2 text-cyber-pink">学习框架与进阶</h3>
+                <p class="text-cyber-light/70">开始学习React框架和更高级的JavaScript概念，开发更复杂的Web应用。</p>
+              </div>
+              <div class="absolute left-9 md:left-1/2 text-sm font-medium text-cyber-pink transform md:-translate-x-1/2 -translate-y-8 order-0">2024年至今</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section id="contact" class="py-20 bg-cyber-black section-fade-in relative">
+      <div class="absolute inset-0 grid-bg opacity-20"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-cyber-purple text-shadow-purple">联系亍幵</h2>
+          <p class="text-cyber-light/70 max-w-2xl mx-auto">
+            对我的作品感兴趣？想交流编程学习经验？请通过以下方式联系我，我会尽快回复你。
+          </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <!-- 优化移动端布局 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- 联系信息 -->
+            <div class="space-y-6">
+              <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-blue/20 shadow-md hover:border-cyber-blue/50 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-cyber-blue">联系方式</h3>
+                
+                <div class="space-y-4">
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-cyber-blue/10 flex items-center justify-center text-cyber-blue flex-shrink-0">
+                      <i class="fa fa-qq"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-cyber-light">QQ</h4>
+                      <p class="text-cyber-light/70">1822520752</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-cyber-blue/10 flex items-center justify-center text-cyber-blue flex-shrink-0">
+                      <i class="fa fa-weixin"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-cyber-light">微信</h4>
+                      <p class="text-cyber-light/70">CJ-5201215</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-cyber-blue/10 flex items-center justify-center text-cyber-blue flex-shrink-0">
+                      <i class="fa fa-envelope"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-cyber-light">邮箱</h4>
+                      <p class="text-cyber-light/70">1822520752@qq.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-cyber-dark/50 p-6 rounded-xl border border-cyber-purple/20 shadow-md hover:border-cyber-purple/50 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-cyber-purple">社交媒体</h3>
+                <div class="flex gap-4">
+                  <a href="#" class="w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 hover:bg-blue-900/50 transition-colors">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-blue-500/30 flex items-center justify-center text-blue-300 hover:bg-blue-500/50 transition-colors">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-red-600/30 flex items-center justify-center text-red-400 hover:bg-red-600/50 transition-colors">
+                    <i class="fa fa-youtube-play"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-900/30 to-pink-900/30 flex items-center justify-center text-pink-400 hover:from-purple-900/50 hover:to-pink-900/50 transition-all">
+                    <i class="fa fa-instagram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 个人简介卡片 -->
+            <div class="bg-gradient-to-br from-cyber-dark to-cyber-black p-8 rounded-xl shadow-md border border-cyber-purple/20 clip-polygon">
+              <h3 class="text-xl font-bold mb-4 text-cyber-purple">学习目标</h3>
+              <p class="text-cyber-light/70 mb-6">
+                作为一名高中生开发者，我的目标是不断提升编程技能，开发更多实用的工具网站，帮助解决实际问题。
+              </p>
+              
+              <h4 class="font-bold mb-3 text-cyber-blue">未来计划学习的技术：</h4>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-cyber-blue"></i>
+                  <span class="text-cyber-light/80">Node.js后端开发</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-cyber-blue"></i>
+                  <span class="text-cyber-light/80">数据库设计与管理</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-cyber-blue"></i>
+                  <span class="text-cyber-light/80">React Native移动应用开发</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-cyber-blue"></i>
+                  <span class="text-cyber-light/80">Python数据分析数据分析</span>
+                </li>
+              </ul>
+              
+              <a href="#projects" class="inline-block-block w-full text-center px-6 py-3 bg-transparent border-2 border-cyber-blue text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/10 transition-all border-glow">
+                查看我的项目
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-cyber-dark py-12 border-t border-cyber-blue/20 relative">
+    <div class="absolute inset-0 grid-bg opacity-10"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <!-- 优化移动端移动端布局 -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <a href="#" class="text-2xl font-bold flex items-center gap-2 mb-4 text-cyber-blue text-shadow-cyber">
+            <i class="fa fa-microchip"></i>
+            <span>亍幵的<span class="text-cyber-purple text-shadow-purple">作品集</span></span>
+          </a>
+          <p class="text-cyber-light/60 mb-6 max-w-md">
+            一名高中生（昵称：亍幵）的自学编程之路，记录我的网站开发作品和学习历程。感谢您的访问！
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">
+              <i class="fa fa-qq text-xl"></i>
+            </a>
+            <a href="#" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-cyber-light/60 hover:text-cyber-pink transition-colors">
+              <i class="fa fa-youtube-play text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4 text-cyber-blue">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">首页</a></li>
+            <li><a href="#projects" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">网站项目</a></li>
+            <li><a href="#about" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">关于我</a></li>
+            <li><a href="#contact" class="text-cyber-light/60 hover:text-cyber-blue transition-colors">联系我</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4 text-cyber-purple">学习资源</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-cyber-light/60 hover:text-cyber-purple transition-colors">我的学习笔记</a></li>
+            <li><a href="#" class="text-cyber-light/60 hover:text-cyber-purple transition-colors">推荐教程</a></li>
+            <li><a href="#" class="text-cyber-light/60 hover:text-cyber-purple transition-colors">常用工具</a></li>
+            <li><a href="#" class="text-cyber-light/60 hover:text-cyber-purple transition-colors">项目源码</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-cyber-blue/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-cyber-light/50 text-sm">© 2025 亍幵的作品集. 记录我的编程学习之路.</p>
+        <div class="mt-4 md:mt-0">
+          <a href="#" class="text-cyber-light/50 hover:text-cyber-blue text-sm mx-2 transition-colors">隐私政策</a>
+          <a href="#" class="text-cyber-light/50 hover:text-cyber-blue text-sm mx-2 transition-colors">使用条款</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-cyber-dark border border-cyber-blue/50 text-cyber-blue shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-cyber-blue/10 hover:border-cyber-blue border-glow">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 优化性能：使用requestAnimationFrame处理动画
+    const requestAnimationFrame = window.requestAnimationFrame || 
+                                window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame ||
+                                window.msRequestAnimationFrame;
+    
+    // 管理员密码
+    const ADMIN_PASSWORD = "20071215zzxx";
+    // 管理员登录状态
+    let isAdminLoggedIn = false;
+    // 存储要删除的项目ID
+    let projectToDeleteId = null;
+    // 音乐播放状态
+    let isMusicPlaying = false;
+    // 用于滚动节流的变量
+    let isScrolling = false;
+    
+    // 从本地存储加载项目
+    function loadProjects() {
+      try {
+        const savedProjects = localStorage.getItem('portfolioProjects');
+        if (savedProjects) {
+          return JSON.parse(savedProjects);
+        }
+      } catch (e) {
+        console.error('加载项目失败:', e);
+        // 发生错误时返回空数组，确保应用不会崩溃
+        return [];
+      }
+      return [];
+    }
+    
+    // 保存项目到本地存储
+    function saveProject(project) {
+      try {
+        const projects = loadProjects();
+        // 为新项目添加唯一ID
+        project.id = 'project-' + Date.now();
+        
+        projects.push(project);
+        localStorage.setItem('portfolioProjects', JSON.stringify(projects));
+        renderProjects();
+        renderProjectManagementList();
+      } catch (e) {
+        console.error('保存项目失败:', e);
+        alert('保存项目失败，请重试');
+      }
+    }
+    
+    // 删除项目
+    function deleteProject(projectId) {
+      // 检查是否是管理员
+      if (!isAdminLoggedIn) {
+        alert('请先以管理员身份登录');
+        return;
+      }
+      
+      try {
+        // 检查是否是默认项目
+        if (projectId.startsWith('default-')) {
+          // 对于默认项目，我们只是隐藏它，而不是从HTML中完全删除
+          document.querySelector(`.project-card[data-id="${projectId}"]`).remove();
+          // 存储已删除的默认项目ID
+          let deletedDefaults = JSON.parse(localStorage.getItem('deletedDefaultProjects') || '[]');
+          if (!deletedDefaults.includes(projectId)) {
+            deletedDefaults.push(projectId);
+            localStorage.setItem('deletedDefaultProjects', JSON.stringify(deletedDefaults));
+          }
+        } else {
+          // 对于用户添加的项目，从本地存储中删除
+          let projects = loadProjects();
+          projects = projects.filter(project => project.id !== projectId);
+          localStorage.setItem('portfolioProjects', JSON.stringify(projects));
+          renderProjects();
+        }
+        renderProjectManagementList();
+      } catch (e) {
+        console.error('删除项目失败:', e);
+        alert('删除项目失败，请重试');
+      }
+    }
+    
+    // 渲染所有项目（包括默认项目和新增项目）
+    function renderProjects() {
+      const projectsGrid = document.getElementById('projectsGrid');
+      const savedProjects = loadProjects();
+      const deletedDefaults = JSON.parse(localStorage.getItem('deletedDefaultProjects') || '[]');
+      
+      // 清除已添加的动态项目（保留默认项目，但隐藏已删除的）
+      document.querySelectorAll('.dynamic-project').forEach(el => el.remove());
+      
+      // 隐藏已删除的默认项目
+      document.querySelectorAll('.project-card[data-default="true"]').forEach(card => {
+        const cardId = card.getAttribute('data-id');
+        if (deletedDefaults.includes(cardId)) {
+          card.style.display = 'none';
+        } else {
+          card.style.display = 'block';
+        }
+      });
+      
+      // 添加保存的项目
+      savedProjects.forEach(project => {
+        const categoryLabels = {
+          'ecommerce': '电商网站',
+          'portfolio': '作品集',
+          'blog': '博客网站',
+          'business': '企业网站',
+          'other': '其他'
+        };
+        
+        // 为不同类别设置不同图标
+        const categoryIcons = {
+          'ecommerce': 'fa-shopping-cart',
+          'portfolio': 'fa-briefcase',
+          'blog': 'fa-pencil',
+          'business': 'fa-building',
+          'other': 'fa-cube'
+        };
+        
+        const card = document.createElement('div');
+        card.className = `project-card dynamic-project card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow project-border transition-all`;
+        card.setAttribute('data-category', project.category);
+        card.setAttribute('data-id', project.id);
+        
+        let technologiesHtml = '';
+        if (project.technologies) {
+          project.technologies.split(',').forEach(tech => {
+            technologiesHtml += `<span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">${tech.trim()}</span>`;
+          });
+        }
+        
+        card.innerHTML = `
+          <div class="p-8 relative">
+            <!-- 装饰性图标 -->
+            <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-blue/10 rounded-lg flex items-center justify-center text-cyber-blue">
+              <i class="fa ${categoryIcons[project.category] || 'fa-cube'}"></i>
+            </div>
+            
+            <div class="mb-6 pt-2">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold text-cyber-light project-title-highlight">${project.name}</h3>
+                <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">${categoryLabels[project.category] || '其他'}</span>
+              </div>
+              <p class="text-cyber-light/70 mb-6">
+                ${project.description}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                ${technologiesHtml}
+              </div>
+              
+              <a href="${project.url}" target="_blank" class="inline-block px-4 py-2 bg-cyber-blue/20 border border-cyber-blue/50 text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/30 transition-colors">
+                访问网站 <i class="fa fa-external-link ml-1"></i>
+              </a>
+            </div>
+            
+            <!-- 装饰性几何元素 -->
+            <div class="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyber-blue/30"></div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyber-purple/30"></div>
+          </div>
+        `;
+        
+        projectsGrid.appendChild(card);
+      });
+    }
+    
+    // 渲染项目管理列表
+    function renderProjectManagementList() {
+      const listContainer = document.getElementById('existingProjectsList');
+      const savedProjects = loadProjects();
+      const deletedDefaults = JSON.parse(localStorage.getItem('deletedDefaultProjects') || '[]');
+      
+      // 获取所有项目（包括默认项目和用户添加的项目）
+      const defaultProjects = [
+        { id: 'default-1', name: '羽毛球快速计分板', isDefault: true },
+        { id: 'default-2', name: '羽毛球拍拉线计算器', isDefault: true }
+      ].filter(project => !deletedDefaults.includes(project.id));
+      
+      const allProjects = [...defaultProjects, ...savedProjects];
+      
+      if (allProjects.length === 0) {
+        listContainer.innerHTML = '<p class="text-cyber-light/50 text-sm italic">暂无项目可管理</p>';
+        return;
+      }
+      
+      let listHtml = '';
+      allProjects.forEach(project => {
+        listHtml += `
+          <div class="flex justify-between items-center p-3 bg-cyber-black/50 rounded-lg border border-cyber-blue/20">
+            <div>
+              <p class="font-medium text-sm text-cyber-light">${project.name}</p>
+              ${project.isDefault ? '<p class="text-xs text-cyber-light/50">默认项目</p>' : ''}
+            </div>
+            <button class="delete-btn w-8 h-8 rounded-full bg-cyber-pink/20 text-cyber-pink flex items-center justify-center shadow-sm hover:bg-cyber-pink/30 transition-all" data-id="${project.id}" data-name="${project.name}">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        `;
+      });
+      
+      listContainer.innerHTML = listHtml;
+      
+      // 为管理列表中的删除按钮绑定事件
+      listContainer.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const projectId = this.getAttribute('data-id');
+          const projectName = this.getAttribute('data-name');
+          openDeleteConfirmModal(projectId, projectName);
+        });
+      });
+    }
+    
+    // 打开删除确认模态框
+    function openDeleteConfirmModal(projectId, projectName) {
+      projectToDeleteId = projectId;
+      document.getElementById('projectToDeleteName').textContent = projectName;
+      document.getElementById('manageModal').classList.add('hidden');
+      document.getElementById('deleteConfirmModal').classList.remove('hidden');
+    }
+    
+    // 关闭删除确认模态框
+    function closeDeleteConfirmModal() {
+      projectToDeleteId = null;
+      document.getElementById('deleteConfirmModal').classList.add('hidden');
+    }
+    
+    // 音乐控制功能
+    function toggleMusic() {
+      const music = document.getElementById('backgroundMusic');
+      const musicControl = document.getElementById('musicControl');
+      const icon = musicControl.querySelector('i');
+      
+      // 首次播放需要设置音量
+      if (music.volume === 1) {
+        music.volume = 0.2; // 设置为20%音量
+      }
+      
+      if (isMusicPlaying) {
+        music.pause();
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-music');
+        musicControl.classList.remove('animate-beat');
+      } else {
+        music.play().catch(e => {
+          console.log('音乐播放需要用户交互:', e);
+          // 显示提示，引导用户交互
+          showMusicTooltip();
+        });
+        icon.classList.remove('fa-music');
+        icon.classList.add('fa-pause');
+        musicControl.classList.add('animate-beat');
+      }
+      
+      isMusicPlaying = !isMusicPlaying;
+    }
+    
+    // 显示音乐提示
+    function showMusicTooltip() {
+      const tooltip = document.getElementById('musicTooltip');
+      tooltip.classList.remove('hidden');
+      
+      // 3秒后自动隐藏
+      setTimeout(() => {
+        tooltip.classList.add('hidden');
+      }, 3000);
+    }
+    
+    // 处理用户交互以启用音乐播放
+    function handleUserInteraction() {
+      const music = document.getElementById('backgroundMusic');
+      
+      // 尝试播放音乐（如果尚未播放）
+      if (!isMusicPlaying) {
+        music.volume = 0.2;
+        music.play().catch(e => {
+          console.log('仍无法播放音乐，等待用户明确操作:', e);
+        });
+      }
+      
+      // 只需要处理一次用户交互
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+    }
+    
+    // 滚动显示动画 - 使用requestAnimationFrame优化性能
+    function handleScrollAnimation() {
+      if (isScrolling) return;
+      
+      isScrolling = true;
+      
+      requestAnimationFrame(() => {
+        const sections = document.querySelectorAll('.section-fade-in');
+        
+        sections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (sectionTop < windowHeight * 0.85) {
+            section.classList.add('section-visible');
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+          }
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const coverHeight = document.getElementById('cover').offsetHeight;
+        
+        if (window.scrollY > coverHeight * 0.7) {
+          navbar.classList.add('bg-cyber-dark/90', 'backdrop-blur-md', 'shadow', 'shadow-cyber-blue/10', 'py-2');
+          navbar.classList.remove('bg-cyber-black/70', 'py-4');
+        } else {
+          navbar.classList.remove('bg-cyber-dark/90', 'backdrop-blur-md', 'shadow', 'shadow-cyber-blue/10', 'py-2');
+          navbar.classList.add('bg-cyber-black/70', 'py-4');
+        }
+        
+        // 返回顶部按钮显示控制
+        const backToTopBtn = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.remove('opacity-0', 'invisible');
+          backToTopBtn.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopBtn.classList.add('opacity-0', 'invisible');
+          backToTopBtn.classList.remove('opacity-100', 'visible');
+        }
+        
+        isScrolling = false;
+      });
+    }
+
+    // 图片懒加载实现
+    function initLazyLoading() {
+      // 检查浏览器是否原生支持IntersectionObserver
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const image = entry.target;
+              // 如果图片有data-src属性，将其赋值给src
+              if (image.dataset.src) {
+                image.src = image.dataset.src;
+                image.removeAttribute('data-src');
+              }
+              imageObserver.unobserve(image);
+            }
+          });
+        });
+        
+        // 观察所有带有lazyload类的图片
+        document.querySelectorAll('img.lazyload').forEach(image => {
+          imageObserver.observe(image);
+        });
+      } else {
+        // 降级处理：不支持IntersectionObserver时直接加载所有图片
+        document.querySelectorAll('img.lazyload').forEach(image => {
+          if (image.dataset.src) {
+            image.src = image.dataset.src;
+            image.removeAttribute('data-src');
+          }
+        });
+      }
+    }
+
+    // 技术标签点击事件
+    function initTechTags() {
+      const techTags = document.querySelectorAll('.tech-tag');
+      const techInput = document.getElementById('projectTechnologies');
+      
+      techTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          const techName = this.textContent.trim();
+          const currentValue = techInput.value.trim();
+          
+          if (currentValue === '') {
+            techInput.value = techName;
+          } else if (!currentValue.includes(techName)) {
+            techInput.value = currentValue + ', ' + techName;
+          }
+          
+          // 聚焦到输入框
+          techInput.focus();
+        });
+      });
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      // 初始化懒加载
+      initLazyLoading();
+      
+      // 初始化技术标签
+      initTechTags();
+      
+      // 初始化科幻风格的元素
+      document.querySelectorAll('.section-fade-in').forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
+      });
+      
+      // 安全地加载项目，添加错误处理
+      try {
+        renderProjects();
+        renderProjectManagementList();
+      } catch (e) {
+        console.error('初始化项目失败:', e);
+        // 显示友好错误信息，但不中断其他功能
+        const projectsGrid = document.getElementById('projectsGrid');
+        projectsGrid.innerHTML = '<div class="col-span-full text-center py-10"><p class="text-cyber-pink">加载项目时发生错误，请刷新页面重试</p></div>';
+      }
+      
+      // 初始触发一次滚动动画检查
+      handleScrollAnimation();
+      
+      // 监听滚动事件以触发动画，使用节流优化性能
+      window.addEventListener('scroll', handleScrollAnimation);
+      
+      // 移动端菜单切换
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        // 切换图标
+        const icon = menuBtn.querySelector('i');
+        if (icon.classList.contains('fa-bars')) {
+          icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+          icon.classList.replace('fa-times', 'fa-bars');
+        }
+      });
+      
+      // 项目过滤功能 - 修复点击无法正确切换标签的问题
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      // 确保每次点击都能正确获取最新的项目卡片列表
+      function getProjectCards() {
+        return document.querySelectorAll('.project-card:not([style*="display: none"])');
+      }
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // 移除所有按钮的活跃状态
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'bg-cyber-blue/20', 'text-cyber-blue', 'border', 'border-cyber-blue/50');
+            b.classList.add('bg-cyber-gray/50', 'hover:bg-cyber-gray', 'text-cyber-light');
+          });
+          
+          // 添加当前按钮的活跃状态
+          btn.classList.add('active', 'bg-cyber-blue/20', 'text-cyber-blue', 'border', 'border-cyber-blue/50');
+          btn.classList.remove('bg-cyber-gray/50', 'hover:bg-cyber-gray', 'text-cyber-light');
+          
+          const filter = btn.getAttribute('data-filter');
+          // 获取所有项目卡片（包括默认和动态添加的）
+          const projectCards = document.querySelectorAll('.project-card');
+          
+          // 使用requestAnimationFrame优化过滤动画性能
+          requestAnimationFrame(() => {
+            // 先隐藏所有卡片
+            projectCards.forEach(card => {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.95)';
+            });
+            
+            // 延迟后根据过滤条件显示符合条件的卡片
+            setTimeout(() => {
+              projectCards.forEach(card => {
+                // 检查卡片是否被永久删除
+                const isDeleted = card.style.display === 'none' && 
+                                  card.hasAttribute('data-default') && 
+                                  card.getAttribute('data-default') === 'true';
+                
+                if (!isDeleted) {
+                  if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                    // 显示动画
+                    setTimeout(() => {
+                      card.style.opacity = '1';
+                      card.style.transform = 'scale(1)';
+                    }, 50);
+                  } else {
+                    card.style.display = 'none';
+                  }
+                }
+              });
+            }, 300);
+          });
+        });
+      });
+      
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // 关闭移动菜单（如果打开）
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+          }
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            // 使用requestAnimationFrame优化平滑滚动
+            const startPosition = window.pageYOffset;
+            const targetPosition = targetElement.offsetTop - 80; // 考虑导航栏高度
+            const distance = targetPosition - startPosition;
+            const duration = 800; // 滚动持续时间（毫秒）
+            let startTime = null;
+            
+            function animation(currentTime) {
+              if (startTime === null) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const run = ease(timeElapsed, startPosition, distance, duration);
+              window.scrollTo(0, run);
+              if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+            
+            // 缓动函数，使滚动更自然
+            function ease(t, b, c, d) {
+              t /= d / 2;
+              if (t < 1) return c / 2 * t * t + b;
+              t--;
+              return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+            
+            requestAnimationFrame(animation);
+          }
+        });
+      });
+      
+      // 返回顶部按钮
+      const backToTopBtn = document.getElementById('backToTop');
+      
+      backToTopBtn.addEventListener('click', () => {
+        // 使用自定义平滑滚动
+        const startPosition = window.pageYOffset;
+        const targetPosition = 0;
+        const distance = targetPosition - startPosition;
+        const duration = 600; // 滚动持续时间（毫秒）
+        let startTime = null;
+        
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+        
+        function ease(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t + b;
+          t--;
+          return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+        
+        requestAnimationFrame(animation);
+      });
+      
+      // 管理模态框相关
+      const manageModal = document.getElementById('manageModal');
+      const manageBtn = document.getElementById('manageBtn');
+      const mobileManageBtn = document.getElementById('mobileManageBtn');
+      const closeModal = document.getElementById('closeModal');
+      const passwordSection = document.getElementById('passwordSection');
+      const projectManagementSection = document.getElementById('projectManagementSection');
+      const addProjectSection = document.getElementById('addProjectSection');
+      const verifyPassword = document.getElementById('verifyPassword');
+      const adminPassword = document.getElementById('adminPassword');
+      const addProjectForm = document.getElementById('addProjectForm');
+      const addNewProjectBtn = document.getElementById('addNewProjectBtn');
+      const backToManagementBtn = document.getElementById('backToManagementBtn');
+      const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+      const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+      const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+      
+      // 打开模态框
+      function openModal() {
+        manageModal.classList.remove('hidden');
+        // 重置模态框状态
+        passwordSection.classList.remove('hidden');
+        projectManagementSection.classList.add('hidden');
+        addProjectSection.classList.add('hidden');
+        adminPassword.value = '';
+      }
+      
+      // 关闭模态框
+      function closeModalFunc() {
+        manageModal.classList.add('hidden');
+      }
+      
+      manageBtn.addEventListener('click', openModal);
+      mobileManageBtn.addEventListener('click', openModal);
+      closeModal.addEventListener('click', closeModalFunc);
+      
+      // 点击模态框外部关闭
+      manageModal.addEventListener('click', (e) => {
+        if (e.target === manageModal) {
+          closeModalFunc();
+        }
+      });
+      
+      // 验证密码
+      verifyPassword.addEventListener('click', () => {
+        if (adminPassword.value === ADMIN_PASSWORD) {
+          // 验证成功，标记为管理员登录状态
+          isAdminLoggedIn = true;
+          passwordSection.classList.add('hidden');
+          projectManagementSection.classList.remove('hidden');
+          renderProjectManagementList(); // 确保列表是最新的
+        } else {
+          alert('密码不正确，请重试');
+        }
+      });
+      
+      // 切换到添加项目表单
+      addNewProjectBtn.addEventListener('click', () => {
+        projectManagementSection.classList.add('hidden');
+        addProjectSection.classList.remove('hidden');
+        addProjectForm.reset();
+      });
+      
+      // 返回项目管理列表
+      backToManagementBtn.addEventListener('click', () => {
+        addProjectSection.classList.add('hidden');
+        projectManagementSection.classList.remove('hidden');
+      });
+      
+      // 添加项目表单提交 - 修复保存按钮无反应问题
+      document.getElementById('addProjectForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 验证必填字段
+        const name = document.getElementById('projectName').value.trim();
+        const url = document.getElementById('projectUrl').value.trim();
+        const description = document.getElementById('projectDescription').value.trim();
+        
+        if (!name || !url || !description) {
+          alert('请填写所有必填字段');
+          return;
+        }
+        
+        const newProject = {
+          name: name,
+          url: url,
+          description: description,
+          category: document.getElementById('projectCategory').value,
+          technologies: document.getElementById('projectTechnologies').value
+        };
+        
+        saveProject(newProject);
+        this.reset();
+        alert('项目添加成功！');
+        addProjectSection.classList.add('hidden');
+        projectManagementSection.classList.remove('hidden');
+      });
+      
+      // 删除确认模态框事件
+      cancelDeleteBtn.addEventListener('click', closeDeleteConfirmModal);
+      
+      confirmDeleteBtn.addEventListener('click', () => {
+        if (projectToDeleteId) {
+          deleteProject(projectToDeleteId);
+          alert('项目已成功删除');
+          closeDeleteConfirmModal();
+          // 重新打开管理模态框
+          manageModal.classList.remove('hidden');
+          projectManagementSection.classList.remove('hidden');
+        }
+      });
+      
+      // 点击删除确认模态框外部关闭
+      deleteConfirmModal.addEventListener('click', (e) => {
+        if (e.target === deleteConfirmModal) {
+          closeDeleteConfirmModal();
+          // 重新打开管理模态框
+          manageModal.classList.remove('hidden');
+        }
+      });
+      
+      // 页面关闭时清除管理员登录状态
+      window.addEventListener('beforeunload', () => {
+        isAdminLoggedIn = false;
+      });
+      
+      // 音乐控制
+      const musicControl = document.getElementById('musicControl');
+      musicControl.addEventListener('click', toggleMusic);
+      
+      // 监听用户交互以启用音乐播放（解决浏览器自动播放限制）
+      document.addEventListener('click', handleUserInteraction);
+      document.addEventListener('keydown', handleUserInteraction);
+      
+      // 页面加载后显示音乐提示
+      setTimeout(showMusicTooltip, 1000);
+    });
+  </script>
+
+
+    
+</body></html>
