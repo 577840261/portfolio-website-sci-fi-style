@@ -431,7 +431,6 @@
   <main>
     <!-- 英雄区域 -->
     <section id="home" class="pt-20 pb-20 bg-cyber-dark grid-bg section-fade-in relative">
-      <div class="absolute inset-0 grid-bg opacity-10"></div>
       <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row items-center gap-12">
           <div class="lg:w-1/2 space-y-6 order-2 lg:order-1">
@@ -442,13 +441,11 @@
               我是亍幵，一名热爱编程的高中生，通过自学掌握了Web开发技能。这里展示了我开发的各类网站项目，每一个作品都代表着我的学习成果与创意实践。
             </p>
             <div class="flex flex-wrap gap-4 pt-4">
-              <!-- 浏览作品按钮 -->
               <a href="#projects" class="px-6 py-3 bg-transparent border-2 border-cyber-blue text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/10 transition-all border-glow flex items-center gap-2">
                 <span>浏览作品</span>
                 <i class="fa fa-arrow-right"></i>
               </a>
-              <!-- 了解我的学习历程按钮 -->
-              <a href="#timeline" class="px-6 py-3 bg-transparent border-2 border-cyber-purple text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/10 transition-all border-glow-purple">
+              <a href="#about" class="px-6 py-3 bg-transparent border-2 border-cyber-purple text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/10 transition-all border-glow-purple">
                 了解我的学习历程
               </a>
             </div>
@@ -553,8 +550,8 @@
         
         <!-- 项目卡片网格 - 优化响应式布局 -->
         <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- 羽毛球快速计分板项目 - 默认项目 -->
-          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow project-border transition-all" data-category="other" data-default="true" data-id="default-1">
+          <!-- 羽毛球快速计分板项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow project-border transition-all" data-category="portfolio" data-id="portfolio-1" data-default="true">
             <div class="p-8 relative">
               <!-- 装饰性图标 -->
               <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-blue/10 rounded-lg flex items-center justify-center text-cyber-blue">
@@ -564,7 +561,7 @@
               <div class="mb-6 pt-2">
                 <div class="flex justify-between items-start mb-4">
                   <h3 class="text-xl font-bold text-cyber-light project-title-highlight">羽毛球快速计分板</h3>
-                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">其他</span>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">作品集</span>
                 </div>
                 <p class="text-cyber-light/70 mb-6">
                   一个实用的羽毛球比赛计分工具，支持快速记录比分、局数和比赛时间。这是我自学JavaScript后的第一个实践项目。
@@ -587,8 +584,8 @@
             </div>
           </div>
           
-          <!-- 羽毛球拍拉线计算器项目 - 默认项目 -->
-          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow-purple project-border transition-all" data-category="other" data-default="true" data-id="default-2">
+          <!-- 羽毛球拍拉线计算器项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow-purple project-border transition-all" data-category="portfolio" data-id="portfolio-2" data-default="true">
             <div class="p-8 relative">
               <!-- 装饰性图标 -->
               <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center text-cyber-purple">
@@ -598,7 +595,7 @@
               <div class="mb-6 pt-2">
                 <div class="flex justify-between items-start mb-4">
                   <h3 class="text-xl font-bold text-cyber-light project-title-highlight">羽毛球拍拉线计算器</h3>
-                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">其他</span>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">作品集</span>
                 </div>
                 <p class="text-cyber-light/70 mb-6">
                   专业的羽毛球拍拉线计算器，帮助球员根据个人打法和习惯计算最佳拉线磅数，提升打球体验。
@@ -612,6 +609,76 @@
                 </div>
                 
                 <a href="https://577840261.github.io/badminton-racket-tension-calculator/" target="_blank" class="inline-block px-4 py-2 bg-cyber-purple/20 border border-cyber-purple/50 text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/30 transition-colors">
+                  访问网站 <i class="fa fa-external-link ml-1"></i>
+                </a>
+              </div>
+              
+              <!-- 装饰性几何元素 -->
+              <div class="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyber-purple/30"></div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyber-pink/30"></div>
+            </div>
+          </div>
+          
+          <!-- 个人财务模拟器项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow project-border transition-all" data-category="portfolio" data-id="portfolio-3" data-default="true">
+            <div class="p-8 relative">
+              <!-- 装饰性图标 -->
+              <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-blue/10 rounded-lg flex items-center justify-center text-cyber-blue">
+                <i class="fa fa-money"></i>
+              </div>
+              
+              <div class="mb-6 pt-2">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-xl font-bold text-cyber-light project-title-highlight">个人财务模拟器</h3>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">作品集</span>
+                </div>
+                <p class="text-cyber-light/70 mb-6">
+                  帮助用户模拟和规划个人财务状况的工具，支持收入支出分析、储蓄目标设定和投资回报预测。
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">HTML5</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">CSS3</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">JavaScript</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">Tailwind CSS</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-purple text-xs rounded">Chart.js</span>
+                </div>
+                
+                <a href="https://577840261.github.io/personal-finance-simulator/" target="_blank" class="inline-block px-4 py-2 bg-cyber-blue/20 border border-cyber-blue/50 text-cyber-blue font-medium rounded-lg hover:bg-cyber-blue/30 transition-colors">
+                  访问网站 <i class="fa fa-external-link ml-1"></i>
+                </a>
+              </div>
+              
+              <!-- 装饰性几何元素 -->
+              <div class="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyber-blue/30"></div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyber-purple/30"></div>
+            </div>
+          </div>
+          
+          <!-- 健康选择模拟器项目 -->
+          <div class="project-card card-hover bg-cyber-dark/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl border-glow-purple project-border transition-all" data-category="portfolio" data-id="portfolio-4" data-default="true">
+            <div class="p-8 relative">
+              <!-- 装饰性图标 -->
+              <div class="absolute top-4 right-4 w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center text-cyber-purple">
+                <i class="fa fa-heartbeat"></i>
+              </div>
+              
+              <div class="mb-6 pt-2">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-xl font-bold text-cyber-light project-title-highlight">健康选择模拟器</h3>
+                  <span class="px-3 py-1 bg-cyber-gray text-cyber-light/80 text-sm rounded-full">作品集</span>
+                </div>
+                <p class="text-cyber-light/70 mb-6">
+                  帮助用户了解不同生活方式选择对健康的长期影响，提供个性化健康建议和改善方案。
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">HTML5</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">CSS3</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">JavaScript</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-blue text-xs rounded">Tailwind CSS</span>
+                  <span class="px-2 py-1 bg-cyber-black/50 text-cyber-pink text-xs rounded">健康数据模型</span>
+                </div>
+                
+                <a href="https://577840261.github.io/health-choice-simulator/" target="_blank" class="inline-block px-4 py-2 bg-cyber-purple/20 border border-cyber-purple/50 text-cyber-purple font-medium rounded-lg hover:bg-cyber-purple/30 transition-colors">
                   访问网站 <i class="fa fa-external-link ml-1"></i>
                 </a>
               </div>
@@ -660,7 +727,7 @@
     </section>
 
     <!-- 学习历程时间线 -->
-    <section id="timeline" class="py-20 bg-cyber-dark section-fade-in relative">
+    <section class="py-20 bg-cyber-dark section-fade-in relative">
       <div class="absolute inset-0 grid-bg opacity-10"></div>
       <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-16">
@@ -971,7 +1038,7 @@
       
       try {
         // 检查是否是默认项目
-        if (projectId.startsWith('default-')) {
+        if (projectId.startsWith('portfolio-')) {
           // 对于默认项目，我们只是隐藏它，而不是从HTML中完全删除
           document.querySelector(`.project-card[data-id="${projectId}"]`).remove();
           // 存储已删除的默认项目ID
@@ -1086,8 +1153,10 @@
       
       // 获取所有项目（包括默认项目和用户添加的项目）
       const defaultProjects = [
-        { id: 'default-1', name: '羽毛球快速计分板', isDefault: true },
-        { id: 'default-2', name: '羽毛球拍拉线计算器', isDefault: true }
+        { id: 'portfolio-1', name: '羽毛球快速计分板', isDefault: true },
+        { id: 'portfolio-2', name: '羽毛球拍拉线计算器', isDefault: true },
+        { id: 'portfolio-3', name: '个人财务模拟器', isDefault: true },
+        { id: 'portfolio-4', name: '健康选择模拟器', isDefault: true }
       ].filter(project => !deletedDefaults.includes(project.id));
       
       const allProjects = [...defaultProjects, ...savedProjects];
@@ -1365,39 +1434,30 @@
           btn.classList.remove('bg-cyber-gray/50', 'hover:bg-cyber-gray', 'text-cyber-light');
           
           const filter = btn.getAttribute('data-filter');
-          // 获取所有项目卡片（包括默认和动态添加的）
-          const projectCards = document.querySelectorAll('.project-card');
+          const projectCards = getProjectCards();
           
           // 使用requestAnimationFrame优化过滤动画性能
           requestAnimationFrame(() => {
-            // 先隐藏所有卡片
+            // 过滤项目卡片
             projectCards.forEach(card => {
+              // 先隐藏所有卡片
               card.style.opacity = '0';
               card.style.transform = 'scale(0.95)';
-            });
-            
-            // 延迟后根据过滤条件显示符合条件的卡片
-            setTimeout(() => {
-              projectCards.forEach(card => {
-                // 检查卡片是否被永久删除
-                const isDeleted = card.style.display === 'none' && 
-                                  card.hasAttribute('data-default') && 
-                                  card.getAttribute('data-default') === 'true';
-                
-                if (!isDeleted) {
-                  if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    // 显示动画
-                    setTimeout(() => {
-                      card.style.opacity = '1';
-                      card.style.transform = 'scale(1)';
-                    }, 50);
-                  } else {
-                    card.style.display = 'none';
-                  }
+              
+              // 延迟后根据过滤条件显示符合条件的卡片
+              setTimeout(() => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                  card.style.display = 'block';
+                  // 显示动画
+                  setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                  }, 50);
+                } else {
+                  card.style.display = 'none';
                 }
-              });
-            }, 300);
+              }, 300);
+            });
           });
         });
       });
